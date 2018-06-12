@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>URUTU Fraud Platform</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+
+  
+
+
+
+
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+        <a class="navbar-brand" href="#">URUTU Fraud Platform</a>
+        </div>
+        <!-- <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Pendentes</a></li>
+        <li><a href="#">Histórico</a></li>
+        <li><a href="#">Modelo</a></li>
+        <li><a href="#">Outros</a></li> -->
+        </ul>
+    </div>
+</nav>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="col-lg-12">
+                <h2>
+                    Cases for analysis</h2>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Type</label>
+                        <br>
+                        <input id="filtro_tipo" name="filtro_tipo" type="text" placeholder=""/>                       
+                    </div>                    
+                    <div class="col-lg-4">
+                        <label>Value</label>
+                        <br>
+                        <input type="text" id="filtro_valor_max" name="filtro_valor_max" placeholder="MAX"/>
+                        <br>
+                        <input type="text" id="filtro_valor_min" name="filtro_valor_min" placeholder="MIN"/>
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Score</label>
+                        <br>
+                        <input type="text" id="filtro_score_max" name="filtro_score_max" placeholder="MAX"/>
+                        <br>
+                        <input type="text" id="filtro_score_min" name="filtro_score_min" placeholder="MIN"/>
+                    </div>
+                </div>
+
+                
+
+                <table id="resultados" class="table display responsive no-wrap">
+                    <thead>
+                        <tr>
+                            <th>CLAIM ID</th>
+                            <th>POLICY NUMBER</th>
+                            <th>POLICY BIND DATE</th>
+                            <th>POLICY STATE</th>
+                            <th>INCIDENT TYPE</th>
+                            <th>SCORE</th>
+                            <th>STATUS</th>
+                            <th>SLA</th> 
+                            <th>AÇÕES</th>
+                            <th hidden>todos_os_dados</th>
+                        </tr>
+                    </thead>
+                    <tbody id="body_table">
+                                             
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/static/tabela.js"></script>
+<script type="text/javascript" src="/static/filtros.js"></script>
+
+
+  
+
+</html>

@@ -1,0 +1,22 @@
+<input type="button" id="teste" value="request" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script>
+    $( "#teste" ).click(function() {
+        $.ajax({
+            url: 'http://35.227.122.84:52773/wf-a/api/tasks?Namespace=ISC-DEMO/',
+            headers: {
+                'Authorization':'Basic xxxxxxxxxxxxx',
+            },
+            method: 'POST',
+            dataType: 'json',
+            data: YourData,
+            success: function(data){
+              console.log('succes: '+data);
+            }
+          });
+        $.get( "", function( data ) {
+            $( ".result" ).html( data );
+            alert( "Load was performed." );
+          });
+    });
+</script>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/> 
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"  media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">&nbsp;&nbsp;&nbsp;Call center - Claim register</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="#">User</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col s12">
+          <h5>Welcome!</h5> <blockquote>Register the claim information here!</blockquote>
+      </div>      
+    </div>
+      <div class="row">
+          <form class="col s12" id="form_dados_cadastro" action="#" method="">
+            <div class="divider"></div>
+            <div class="section">
+              <h5>Initial data of claim</h5>
+              <br>
+              <div class="row">
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">description</i>
+                  <input placeholder="0000000000000" id="policyNumber" name="policyNumber" type="text" class="validate">
+                  <label for="numero_apolice">Policy number</label>
+                </div>
+                <div class="input-field col s3">
+                    <i class="material-icons prefix">date_range</i>
+                  <input type="text" id="data_sinistro" name="data_sinistro" placeholder="Click here" class="datepicker">
+                  <label for="data_sinistro">Date of claim</label>
+                </div>
+                <div class="input-field col s3">
+                    <i class="material-icons prefix">access_time</i>
+                    <input type="text" id="incidentHourOfTheDay" name="incidentHourOfTheDay" placeholder="Click here" class="timepicker">
+                  <label for="hora_sinistro">Time of the accident</label>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="divider"></div>
+            <div class="section">
+              <h5>Insured personal data</h5>
+              <br>
+              <div class="row">
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">account_circle</i>
+                  <input placeholder="" id="fullname" name="fullname" type="text" class="validate">
+                  <label for="nome_segurado">Full name</label>
+                </div>
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">ballot</i>
+                  <input placeholder="000.000.000-00 ou 00.000.000/0000-00" id="docnumber" name="docnumber" type="text" class="validate">
+                  <label for="doc_segurado">CPF/CNPJ</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+            <div class="section">
+              <h5>Data of vehicle</h5>
+              <br>
+              <div class="row">
+                <div class="input-field col s2">
+                    <i class="material-icons prefix">time_to_leave</i>
+                  <input placeholder="000-0000" id="carplate" name="carplate" type="text" class="validate">
+                  <label for="placa_veiculo">Car plate</label>
+                </div>
+                <div class="input-field col s2">
+                    <i class="material-icons prefix">apps</i>
+                  <input placeholder="" id="yearmodel" name="yearmodel" type="text" class="validate">
+                  <label for="anomodelo_veiculo">Year/Model</label>
+                </div>
+                <div class="input-field col s4">
+                    <i class="material-icons prefix">dehaze</i>
+                  <input placeholder="" id="carbrand" name="carbrand" type="text" class="validate">
+                  <label for="marca_veiculo">Car brand</label>
+                </div>
+                <div class="input-field col s4">
+                    <i class="material-icons prefix">crop_16_9</i>
+                  <input placeholder="" id="chassis" name="chassis" type="text" class="validate">
+                  <label for="chassi_veiculo">Chassis******</label>
+                </div>
+              </div>
+            </div>  
+
+
+            <div class="divider"></div>
+            <div class="section">
+              <h5>Claim data</h5>
+              <br>
+              <div class="row">                  
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">warning</i>
+                  <input placeholder="" id="cause" name="cause" type="text" class="validate">
+                  <label for="causa_sinistro">Cause</label>
+                </div>
+
+                <div id="caso_furto" hidden class="input-field col s6">
+                    <select id="caso_furto_select" name="caso_furto_select">
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                    <label>Veículo localizado?</label>                    
+                </div>
+
+                <div id="caso_natureza" hidden class="input-field col s6">
+                    <select id="caso_natureza_select" name="caso_natureza_select">
+                        <option value="" disabled selected>Escolha uma opção</option>
+                        <option value="1">Granizo</option>
+                        <option value="0">Inundação</option>
+                    </select>
+                    <label>Escolha um fenômeno?</label>                    
+                </div> 
+              </div>
+              <div class="row">
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">pin_drop</i>
+                  <input placeholder="" id="address" name="address" type="text" class="validate">
+                  <label for="endereco_sinistro">Address</label>
+                </div>
+                <div class="input-field col s3">
+                    <i class="material-icons prefix">streetview</i>
+                  <input placeholder="" id="city" name="city" type="text" class="validate">
+                  <label for="cidade_sinistro">City</label>
+                </div>
+                <div class="input-field col s3">
+                    <i class="material-icons prefix">terrain</i>
+                  <input placeholder="" id="state" name="state" type="text" class="validate">
+                  <label for="estado_sinistro">State</label>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row">
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">format_align_justify</i>
+                  <textarea id="description" name="description" class="materialize-textarea"></textarea>
+                  <label for="descricao_sinistro">Description of claim</label>
+                </div>
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">format_align_justify</i>
+                  <textarea id="damage" name="damage" class="materialize-textarea"></textarea>
+                  <label for="danos_sinistro">Description of damage</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s4">
+                    <select id="utilizado_seguro" name="utilizado_seguro">
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="0">All</option>
+                        <option value="1">Insured</option>
+                        <option value="2">3rd's</option>
+                    </select>
+                    <label>Will the insurance be used for which vehicles?</label>
+                </div> 
+                <div class="input-field col s4">
+                    <select id="causador_acidente" name="causador_acidente">
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="1">Insured</option>
+                        <option value="2">3rd's</option>
+                    </select>
+                    <label>Who caused the accident?</label>
+                </div> 
+                <div class="input-field col s4">
+                    <select id="houve_vitma" name="houve_vitma">
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="1">Yes</option>
+                        <option value="2">No</option>
+                    </select>
+                    <label>Was there a victim?</label>
+                </div>                              
+            </div>
+            <div class="divider"></div>
+            <div class="row">
+              <div class="input-field col s3">
+                <i class="material-icons prefix">attach_money</i>
+                <input placeholder="R$ " id="totalclaimamount" name="totalclaimamount" type="text" class="validate">
+                <label for="totalclaimamount">Total claim amount</label>
+              </div>
+              <div class="input-field col s3">
+                <i class="material-icons prefix">attach_money</i>
+                <input placeholder="R$ " id="injuryclaim" name="injuryclaim" type="text" class="validate">
+                <label for="injuryclaim">Injury claim</label>
+              </div>
+              <div class="input-field col s3">
+                <i class="material-icons prefix">attach_money</i>
+                <input placeholder="R$ ?" id="propertyclaim" name="propertyclaim" type="text" class="validate">
+                <label for="propertyclaim">Property claim</label>
+              </div>
+              <div class="input-field col s3">
+                <i class="material-icons prefix">attach_money</i>
+                <input placeholder="R$ " id="vehicleclaim" name="vehicleclaim" type="text" class="validate">
+                <label for="vehicleclaim">Vehicle claim</label>
+              </div>
+            </div>
+
+            
+            <div class="divider"></div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <button class="btn waves-effect waves-light btn-block-salvar" id="btn_cadastrar_dados" type="button" name="action">Save
+                      <i class="material-icons right">check</i>
+                    </button>
+                </div>
+                <!-- #ef5350 -->
+                <style>
+                    .btn-block-cancelar {
+                      width: 100%;
+                      background-color: #ef5350;
+                   }
+                   .btn-block-salvar {
+                    width: 100%;                    
+                 }
+                </style>
+                <div class="input-field col s6">
+                    <button class="btn waves-effect waves-light btn-block-cancelar" type="button" name="action">Cancel
+                      <i class="material-icons right">clear</i>
+                    </button>
+                </div>
+            </div>                
+          </form>
+        </div>
+  </div>
+
+
+
+<!--JavaScript at end of body for optimized loading-->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script type="text/javascript" src="/static/meu.js"></script>
+<script type="text/javascript" src="/static/config_pickers.js"></script>
+<script type="text/javascript" src="/static/submit.js"></script>
+</body>
+</html>

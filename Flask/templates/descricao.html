@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>URUTU Fraud Platform</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+  <link rel="stylesheet" type="text/css" href="/static/meu.css">
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+        <a class="navbar-brand" href="#">URUTU Fraud Platform</a>
+        </div>
+        <!-- <ul class="nav navbar-nav">
+        <li><a href="#">Pendentes</a></li>
+        <li><a class="active" href="#">Descrição</a></li>
+        <li><a href="#">Modelo</a></li>
+        <li><a href="#">Outros</a></li> -->
+        </ul>
+    </div>
+</nav>
+
+
+<div class="container">    
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">  <h4 >Personal information</h4></div>
+                <div class="panel-body">
+                    <div class="col-lg-12 table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Age</th>
+                                    <th>Months as Customer</th>
+                                    <th>Policy State</th>
+                                    <th>Insured Sex</th>
+                                    <th>Insured Zip</th>
+                                    <th>Insured Occupation</th>       
+                                    <th>Insured Education Level</th>    
+                                    <th>Insured Relationship</th>                                          
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{dados['ID']}}</td>
+                                    <td>{{dados['monthsAsCustomer']}}</td>
+                                    <td>{{dados['policyState']}}</td>
+                                    <td>{{dados['insuredSex']}}</td>
+                                    <td>{{dados['insuredZip']}}</td>
+                                    <td>{{dados['insuredOccupation']}}</td>
+                                    <td>{{dados['insuredEducationLevel']}}</td>
+                                    <td>{{dados['insuredRelationship']}}</td>
+                                </tr>
+                            </tbody>
+                        </table>                        
+                    </div>
+                </div>
+            </div>
+        </div>    
+        
+        
+        <div class="col-lg-4">
+            <div class="col-lg-12">
+                <h2>Predicted vaue: {{ modelo['predictedValue'] }}</h2>
+                <div class="progress">
+                    <div class="progress-bar" id="intercept" role="progressbar" aria-valuenow="20" style="">
+                    </div>
+                    <span class="progress-type">Parameter: Intercept</span>
+                    <span class="progress-completed" id="valor_intercept">{{ modelo['trace'][0]["weight"] }}</span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar" id="injury_claim" role="progressbar" aria-valuenow="20" style="width: 20%;">
+                    </div>
+                    <span class="progress-type">Parameter: Injury_claim</span>
+                    <span class="progress-completed" id="valor_injury_claim">{{ modelo['trace'][2]["weight"] }}</span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" id="total_claim_amount" aria-valuenow="20" style="width: 20%;">
+                    </div>
+                    <span class="progress-type">Parameter: Total_claim_amount</span>
+                    <span class="progress-completed" id="valor_total_claim_amount">{{ modelo['trace'][1]["weight"] }}</span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" id="property_claim" aria-valuenow="20" style="width: 20%;">
+                    </div>
+                    <span class="progress-type">Parameter: Property_claim</span>
+                    <span class="progress-completed" id="valor_property_claim">{{ modelo['trace'][3]["weight"] }}</span>
+                </div>                                              
+            </div>
+        </div>    
+    </div>
+    <div class="row">
+        
+        <div class="col-lg-12">
+            <div class="panel panel-default">                
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <h4>Total Claim Amount    <span class="label label-primary">{{dados['totalClaimAmount']}}</span> </h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <h4>Incident State    <span class="label label-primary">{{dados['incidentState']}}</span> </h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <h4>Incident City    <span class="label label-primary">{{dados['incidentCity']}}</span> </h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <h4>Witnesses?    <span class="label label-primary">{{dados['witnesses']}}</span> </h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <h4>Number Of Vehicles Involved    <span class="label label-primary">{{dados['numberOfVehiclesInvolved']}}</span> </h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <h4>Property Damage    <span class="label label-primary">{{dados['propertyDamage']}}</span> </h4>
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <h4>Police Report Available    <span class="label label-primary">{{dados['policeReportAvailable']}}</span> </h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <h4>Bodily Injuries    <span class="label label-primary">{{dados['bodilyInjuries']}}</span> </h4>
+                        </div>    
+                        <div class="col-lg-4">
+                            <h4>Incident Type    <span class="label label-primary">{{dados['incidentType']}}</span> </h4>
+                        </div>                    
+                    </div>                                                    
+                </div>
+            </div>
+        </div>         
+    </div>
+    <div class="row">
+        <div class="col-lg-12 table-responsive">
+            <table id="relevantes" class="table">
+                <thead>
+                    <tr>                                   
+                        <th>Incident Date</th>
+                        <th>Collision Type</th>
+                        <th>Incident Severity</th>
+                        <th>Authorities Contacted</th>
+                        <th>Incident Location</th>
+                        <th>Incident Hour Of The Day</th>
+                        <th>Injury Claim</th>
+                        <th>Property Claim</th>
+                        <th>Vehicle Claim</th>
+                        <th>Auto Make</th>
+                        <th>Auto Model</th>
+                        <th>Auto Year</th>                                                                                       
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>                                    
+                        <td>{{dados['incidentDate']}}</td>
+                        <td>{{dados['collisionType']}}</td>
+                        <td>{{dados['incidentSeverity']}}</td>
+                        <td>{{dados['authoritiesContacted']}}</td>
+                        <td>{{dados['incidentLocation']}}</td>
+                        <td>{{dados['incidentHourOfTheDay']}}</td>
+                        <td>{{dados['injuryClaim']}}</td>
+                        <td>{{dados['propertyClaim']}}</td>
+                        <td>{{dados['vehicleClaim']}}</td>
+                        <td>{{dados['autoMake']}}</td>
+                        <td>{{dados['autoModel']}}</td>
+                        <td>{{dados['autoYear']}}</td>
+                    </tr>
+                </tbody>
+            </table>       
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">                
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <button type="button" id="btn_fraude_confirmada" class="btn btn-danger btn-block">Fraud confirmed</button>
+                            </div>
+                            <div class="col-lg-6">
+                                <button type="button" id="btn_falso_positivo" class="btn btn-primary btn-block">False positive</button>
+                            </div>
+                        </div>                                                         
+                    </div>
+                </div>
+            </div>
+        </div>          
+    </div>
+</div>
+
+<!-- Inserir script para mudar a cor-->
+
+<script>
+        var getUrlParameter = function getUrlParameter(sParam) {
+            var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+        
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+        
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : sParameterName[1];
+                }
+            }
+        };
+
+
+        $( "#btn_fraude_confirmada" ).click(function() {
+            var base64json = getUrlParameter('base64json');       
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:5000/decisao_analista?base64json='+ base64json,
+                data: {decisao: "fraud"},
+                success: function(data) { alert('data: ' + data); },
+                contentType: "application/json",
+                dataType: 'json'
+            });
+            //window.location.replace("http://localhost:5000/analista");
+          });
+          $( "#btn_falso_positivo" ).click(function() {
+            var base64json = getUrlParameter('base64json');       
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:5000/decisao_analista?base64json='+ base64json,
+                data: {decisao: "non fraud"},
+                success: function(data) { alert('data: ' + data); },
+                contentType: "application/json",
+                dataType: 'json'
+            });
+            //window.location.replace("http://localhost:5000/analista");
+          });
+
+
+
+
+
+        function progresso(elemento, label, valor) {
+            var elem = document.getElementById(elemento);         
+            var width = valor * 100;
+
+            if(width <= 0){
+                width = 1
+            }
+
+            if(width <= 33){
+                elem.style.backgroundColor = "#ff2100";
+            }
+            else if(width <= 66){
+                elem.style.backgroundColor = "#b5ba60";
+            }
+            else{
+                elem.style.backgroundColor = "#228B22";
+            }
+            elem.style.width = width + '%'; 
+        } 
+        var vl_Intercept = parseFloat($( "#valor_intercept" ).text());
+        var vl_Injury_claim = parseFloat($( "#valor_injury_claim" ).text());
+        var vl_Total_claim_amount = parseFloat($( "#valor_total_claim_amount" ).text());
+        var vl_Property_claim = parseFloat($( "#valor_property_claim" ).text());
+
+
+        progresso("intercept", "valor_intercept", vl_Intercept);
+        progresso("injury_claim", "valor_injury_claim", vl_Injury_claim);
+        progresso("total_claim_amount", "valor_total_claim_amount", vl_Total_claim_amount);
+        progresso("property_claim", "valor_property_claim", vl_Property_claim);
+    
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<div class="container">    
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">  <h4 >Informações pessoais</h4></div>
+                <div class="panel-body">
+                    <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                        <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive"> 
+                    </div>
+                    <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8" >
+                        <div class="container" >
+                            <h2>John Doe</h2>
+                            <p>an   <b> Employee</b></p> 
+                        </div>
+                        <hr>
+                        <ul class="container details" >
+                            <li><p><span class="glyphicon glyphicon-user one" style="width:50px;"></span>i.rudberg</p></li>
+                            <li><p><span class="glyphicon glyphicon-envelope one" style="width:50px;"></span>somerandom@email.com</p></li>
+                        </ul>
+                        <hr>
+                        <div class="col-sm-5 col-xs-6 tital " >Date Of Joining: 15 Jun 2016</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</body>
+
+</html>
