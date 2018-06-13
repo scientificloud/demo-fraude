@@ -129,13 +129,32 @@ def analista():
 def cadastrar_dados():    
     import requests, json, base64
     URL = "http://35.227.122.84:52773/api/pmml/"
-
     policynumber = request.form.get("numero_apolice")
     totalclaimamount = request.form.get("totalclaimamount")
     injuryclaim = request.form.get("injuryclaim")
     propertyclaim = request.form.get("propertyclaim")
     vehicleclaim = request.form.get("vehicleclaim")
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     credenciais = base64.b64encode("superuser:iris".encode("utf-8"))
     credenciais = str(credenciais).split("'")[1]
     headers = {
