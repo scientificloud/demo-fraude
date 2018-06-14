@@ -80,10 +80,12 @@ def decisao_analista():
     json_dados = json.loads(json_dados)
     decisao = dados.replace("decisao=", "")
 
-    json_dados['statusAgent'] = decisao   
+    json_dados['statusAgent'] = decisao
 
 
-    URL = "http://35.227.122.84:52773/api/fraud/data/form/object/ScientifiCloud.Data.InsuranceClaim/" + json_dados["ID"]
+    URL = "http://35.227.122.84:52773/api/fraud/data/form/object/ScientifiCloud.Data.InsuranceClaim/" + str(json_dados["ID"])
+
+    json_dados = json.dumps(json_dados)
 
     credenciais = base64.b64encode("superuser:iris".encode("utf-8"))
     credenciais = str(credenciais).split("'")[1]
@@ -92,7 +94,7 @@ def decisao_analista():
         "Content-Type": "application/json"
     }
     
-    r = requests.post(URL, headers=headers, data=json.dumps(json_dados))
+    r = requests.put(URL, headers=headers, data=json_dados)
     
     if(r.status_code == 200):
         return jsonify({
@@ -135,26 +137,6 @@ def cadastrar_dados():
     injuryclaim = request.form.get("injuryclaim")
     propertyclaim = request.form.get("propertyclaim")
     vehicleclaim = request.form.get("vehicleclaim")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     
     credenciais = base64.b64encode("superuser:iris".encode("utf-8"))
     credenciais = str(credenciais).split("'")[1]
@@ -171,27 +153,30 @@ def cadastrar_dados():
         "vehicleclaim":int(vehicleclaim)
     }
 
+
+    #criar request com base no policy number
+
     r = requests.post(URL, headers=headers, data=json.dumps(data))
 
     r = r.json()
     if r['status'] == "fraud":       
         return jsonify({"Resultado": {
             "Modelo": {
-                "Mensagem": "Fraude detectada.",
+                "Mensagem": "Foi identificado irregularidade, o caso será encaminhado para auditoria.",
                 "Resultado":str(r['reason'])
             }
         }})
     elif r['status'] == 'triage':
         return jsonify({"Resultado": {
             "Modelo": {
-                "Mensagem": "Caso movido para triagem",
+                "Mensagem": "Esse caso possuí algumas inconsistências e será avalido.",
                 "Resultado":str(r['reason'])
             }
         }})
     else:
        return jsonify({"Resultado": {
             "Modelo": {
-                "Mensagem": "O caso não é fraude.",
+                "Mensagem": "Caso pronto para ser encaminhado para o departamento de pagamentos.",
                 "Resultado":str(r['reason'])
             }
         }}) 
@@ -240,7 +225,7 @@ def descricao():
  
 
 if __name__ == "__main__":
-    app.run(debug=False, host='0.0.0.0', port=8080)
+    app.run(debug=True)
 
 
 # create_table_sql = """CREATE TABLE IF NOT EXISTS sinistros(

@@ -1,4 +1,5 @@
-{"ID":"19",
+{
+"ID":"19",
 -"monthsAsCustomer":10,
 -"age":"19",
 "policyNumber":216738,
@@ -44,4 +45,5 @@
 "statusBatch":"1",
 "SLATarget":"Y",
 "pictureURL":"",
-"_class":"ScientifiCloud.Data.InsuranceClaim"}
+"_class":"ScientifiCloud.Data.InsuranceClaim"
+}

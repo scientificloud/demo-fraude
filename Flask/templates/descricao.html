@@ -52,7 +52,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>{{dados['ID']}}</td>
+                                    <td>{{dados['age']}}</td>
                                     <td>{{dados['monthsAsCustomer']}}</td>
                                     <td>{{dados['policyState']}}</td>
                                     <td>{{dados['insuredSex']}}</td>
@@ -220,25 +220,31 @@
             var base64json = getUrlParameter('base64json');       
             $.ajax({
                 type: 'POST',
-                url: 'http://35.227.122.84:8080/decisao_analista?base64json='+ base64json,
+                url: 'http://localhost:5000/decisao_analista?base64json='+ base64json,
                 data: {decisao: "fraud"},
-                success: function(data) { alert('data: ' + data); },
+                success: function(data) { 
+                    console.log(data); 
+                    alert("Informação salva")
+                    window.location.replace("http://localhost:5000/analista");
+                },
                 contentType: "application/json",
                 dataType: 'json'
-            });
-            //window.location.replace("http://localhost:5000/analista");
+            });            
           });
           $( "#btn_falso_positivo" ).click(function() {
             var base64json = getUrlParameter('base64json');       
             $.ajax({
                 type: 'POST',
-                url: 'http://35.227.122.84:8080/decisao_analista?base64json='+ base64json,
+                url: 'http://localhost:5000/decisao_analista?base64json='+ base64json,
                 data: {decisao: "non fraud"},
-                success: function(data) { alert('data: ' + data); },
+                success: function(data) {
+                    console.log(data); 
+                    alert("Informação salva")
+                    window.location.replace("http://localhost:5000/analista");
+                },
                 contentType: "application/json",
                 dataType: 'json'
-            });
-            //window.location.replace("http://localhost:5000/analista");
+            });            
           });
 
 

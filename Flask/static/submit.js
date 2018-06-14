@@ -17,7 +17,7 @@ $( "#btn_cadastrar_dados" ).click(function() {
 
     console.log(config)
 
-    var jqxhr = $.post( "http://35.227.122.84:8080/cadastrar_dados", config ,  function(data) {
+    var jqxhr = $.post( "http://localhost:5000/cadastrar_dados", config ,  function(data) {
         console.log(data);
         alert(data.Resultado.Modelo.Mensagem);
     })
