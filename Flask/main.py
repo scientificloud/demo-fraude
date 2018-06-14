@@ -1,3 +1,4 @@
+#coding: utf-8
 from flask import Flask, request, render_template, jsonify, g
 import sqlite3
 import base64

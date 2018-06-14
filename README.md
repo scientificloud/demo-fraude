@@ -54,6 +54,10 @@ Como executar
 Dentri da pasta Flask, abra o terminal/powershell/cmd e digite:
 **python main.py**
 Acesse a URL:
-
 localhost:5000/<:rota padrao:>
 127.0.0.1:5000/<:rota padrao:>
+
+####Docker
+Caso possua docker instalado abra o terminal/powershell/cmd, acesse a pasta *FLASK* e digite:
+docker build -t <:nome_da_imagem:> .
+docker run -it -p 5000:5000 <:nome_da_imagem:>
