@@ -240,28 +240,30 @@ def descricao():
  
 
 if __name__ == "__main__":
-    create_table_sql = """CREATE TABLE IF NOT EXISTS sinistros(
-                id INTEGER PRIMARY KEY,
-                anomodelo_veiculo text,
-                causa_sinistro text,
-                chassi_veiculo text,
-                cidade_sinistro text,
-                danos_sinistro text, 
-                data_sinistro text,
-                descricao_sinistro text,
-                doc_segurado text,
-                endereco_sinistro text, 
-                estado_sinistro text, 
-                hora_sinistro text, 
-                marca_veiculo text,
-                nome_segurado text, 
-                numero_apolice text,
-                placa_veiculo text,
-                status text,
-                sla real,
-                score real
-            )"""
-    conn = sqlite3.connect(DATABASE)
-    conn.execute(create_table_sql)
-    conn.close()
-    app.run(debug=True)
+    app.run(debug=False, host='0.0.0.0', port=8080)
+
+
+# create_table_sql = """CREATE TABLE IF NOT EXISTS sinistros(
+#                 id INTEGER PRIMARY KEY,
+#                 anomodelo_veiculo text,
+#                 causa_sinistro text,
+#                 chassi_veiculo text,
+#                 cidade_sinistro text,
+#                 danos_sinistro text, 
+#                 data_sinistro text,
+#                 descricao_sinistro text,
+#                 doc_segurado text,
+#                 endereco_sinistro text, 
+#                 estado_sinistro text, 
+#                 hora_sinistro text, 
+#                 marca_veiculo text,
+#                 nome_segurado text, 
+#                 numero_apolice text,
+#                 placa_veiculo text,
+#                 status text,
+#                 sla real,
+#                 score real
+#             )"""
+# conn = sqlite3.connect(DATABASE)
+# conn.execute(create_table_sql)
+# conn.close()

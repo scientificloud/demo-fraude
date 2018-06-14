@@ -220,7 +220,7 @@
             var base64json = getUrlParameter('base64json');       
             $.ajax({
                 type: 'POST',
-                url: 'http://localhost:5000/decisao_analista?base64json='+ base64json,
+                url: 'http://35.227.122.84:8080/decisao_analista?base64json='+ base64json,
                 data: {decisao: "fraud"},
                 success: function(data) { alert('data: ' + data); },
                 contentType: "application/json",
@@ -232,7 +232,7 @@
             var base64json = getUrlParameter('base64json');       
             $.ajax({
                 type: 'POST',
-                url: 'http://localhost:5000/decisao_analista?base64json='+ base64json,
+                url: 'http://35.227.122.84:8080/decisao_analista?base64json='+ base64json,
                 data: {decisao: "non fraud"},
                 success: function(data) { alert('data: ' + data); },
                 contentType: "application/json",
