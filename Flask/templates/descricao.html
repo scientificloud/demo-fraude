@@ -123,7 +123,7 @@
                             <h4>Number Of Vehicles Involved    <span class="label label-primary">{{dados['numberOfVehiclesInvolved']}}</span> </h4>
                         </div>
                         <div class="col-lg-4">
-                            <h4>Property Damage    <span class="label label-primary">{{dados['propertyDamage']}}</span> </h4>
+                            <h4 id="rlx_pranvi"></h4>
                         </div>
                     </div> 
                     <div class="row">
@@ -134,7 +134,7 @@
                             <h4>Bodily Injuries    <span class="label label-primary">{{dados['bodilyInjuries']}}</span> </h4>
                         </div>    
                         <div class="col-lg-4">
-                            <h4>Incident Type    <span class="label label-primary">{{dados['incidentType']}}</span> </h4>
+                            <h4>Finance Relationship    <span class="label label-primary" id="relacionaptca"></span> </h4>
                         </div>                    
                     </div>                                                    
                 </div>
@@ -197,9 +197,32 @@
     </div>
 </div>
 
-<!-- Inserir script para mudar a cor-->
+<!-- Inputs para criar relações -->
+<input hidden id="policyAnnualPremium" value="{{ dados['policyAnnualPremium'] }}" type="text" />
+<input hidden id="totalClaimAmount" value="{{ dados['totalClaimAmount'] }}" type="text" />
+
+<input hidden id="policeReportAvailable" value="{{ dados['policeReportAvailable'] }}" type="text" />
+<input hidden id="numberOfVehiclesInvolved" value="{{ dados['numberOfVehiclesInvolved'] }}" type="text" />
+
 
 <script>
+        function relacoes(){
+
+            var premioanual = parseFloat($("#policyAnnualPremium").val());
+            var claimamount = parseFloat($("#totalClaimAmount").val());
+            $("#relacionaptca").append(((claimamount / premioanual)*100).toFixed(2) + " %");
+
+            var boletim = $("#policeReportAvailable").val();
+            var veiculosenvolvidos = parseInt($("#numberOfVehiclesInvolved").val());
+            
+            if(boletim == "no" || boletim == "?" || boletim == "NO" && veiculosenvolvidos >= 0){
+                $("#rlx_pranvi").append("Security risk? <span class=\"label label-danger\">" + "ATENTION" + "</span>")
+            }
+        }
+
+        relacoes();
+
+
         var getUrlParameter = function getUrlParameter(sParam) {
             var sPageURL = decodeURIComponent(window.location.search.substring(1)),
                 sURLVariables = sPageURL.split('&'),
@@ -247,17 +270,9 @@
             });            
           });
 
-
-
-
-
         function progresso(elemento, label, valor) {
             var elem = document.getElementById(elemento);         
             var width = valor * 100;
-
-            if(width <= 0){
-                width = 1
-            }
 
             if(width <= 33){
                 elem.style.backgroundColor = "#ff2100";

@@ -1,34 +1,29 @@
 $('#resultados').DataTable({});
 
+var d = new Date();            
+var strDate = d.getFullYear() + "/" + (d.getMonth()+1) + "/" + d.getDate();
+var data_atual = new Date(strDate);
+
 $.get( "http://localhost:5000/receber_dados_intersystems/1", function( data ) {
-
-
     $.each(data.Resultado.Dados.children, function(i, item) {
-        if(item.statusAgent == "" && item.status == "triage"){
-            var html = "";
-            
-            var d = new Date();            
-            var strDate = d.getFullYear() + "/" + (d.getMonth()+1) + "/" + d.getDate();
-            
-            var date1 = new Date(item.incidentDate);
-            var date2 = new Date(strDate);
-            var timeDiff = Math.abs(date2.getTime() - date1.getTime());
-            var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
-    
-            html = html + "<tr>";
-            html = html + "<td value='"+item.ID+"'> "+item.ID+"</td>";
-            html = html + "<td value='"+item.policyNumber+"'> "+item.policyNumber+"</td>";
-            html = html + "<td value='"+item.policyBindDate+"'> "+item.policyBindDate+"</td>";
-            html = html + "<td value='"+item.policyState+"'> "+item.policyState+"</td>";
-            html = html + "<td value='"+item.incidentType+"'> "+item.incidentType+"</td>";
-            html = html + "<td value='"+item.score+"'> "+item.score+"</td>";
-            html = html + "<td value='"+item.status+"'> "+item.status+"</td>";
-            html = html + "<td value='"+diffDays+"'> "+diffDays+"</td>";
-            html = html + "<td><button type=\"button\" id=\"btn_editar_tabela\" style=\"heigth: 10%\" class=\"btn btn-primary\">Edit</button></td>"
-            html = html + "<td hidden>" + JSON.stringify(item) + "</td>";
-            html = html + "</tr>";
-            $('#resultados').DataTable().row.add($(html)).draw();
-        }        
+        var html = "";        
+        var date1 = new Date(item.incidentDate);
+        var timeDiff = Math.abs(data_atual.getTime() - date1.getTime());
+        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+
+        html = html + "<tr>";
+        html = html + "<td value='"+item.ID+"'> "+item.ID+"</td>";
+        html = html + "<td value='"+item.policyNumber+"'> "+item.policyNumber+"</td>";
+        html = html + "<td value='"+item.policyBindDate+"'> "+item.policyBindDate+"</td>";
+        html = html + "<td value='"+item.policyState+"'> "+item.policyState+"</td>";
+        html = html + "<td value='"+item.incidentType+"'> "+item.incidentType+"</td>";
+        html = html + "<td value='"+item.score+"'> "+item.score+"</td>";
+        html = html + "<td value='"+item.status+"'> "+item.status+"</td>";
+        html = html + "<td value='"+diffDays+"'> "+diffDays+"</td>";
+        html = html + "<td><button type=\"button\" id=\"btn_editar_tabela\" style=\"heigth: 10%\" class=\"btn btn-primary\">Edit</button></td>"
+        html = html + "<td hidden>" + JSON.stringify(item) + "</td>";
+        html = html + "</tr>";
+        $('#resultados').DataTable().row.add($(html)).draw();     
     })
 });
 

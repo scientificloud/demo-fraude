@@ -40,7 +40,7 @@ def insert(query, args):
 @app.route('/receber_dados_intersystems/<int:tipo>', methods=['GET', 'POST'])
 def receber_dados_intersystems(tipo):
     import requests, os, json, base64
-    URL = "http://35.227.122.84:52773/api/fraud/data/form/objects/ScientifiCloud.Data.InsuranceClaim/all"
+    URL = "http://35.227.122.84:52773/api/fraud/data/form/objects/ScientifiCloud.Data.InsuranceClaim/all?size=5000&page=1&filter=statusAgent%20eq%20triage"
 
     credenciais = base64.b64encode("superuser:iris".encode("utf-8"))
     credenciais = str(credenciais).split("'")[1]
@@ -162,21 +162,21 @@ def cadastrar_dados():
     if r['status'] == "fraud":       
         return jsonify({"Resultado": {
             "Modelo": {
-                "Mensagem": "Foi identificado irregularidade, o caso será encaminhado para auditoria.",
+                "Mensagem": "Foi identificado irregularidade, o caso será encaminhado para auditoria. " + str(r['status']),
                 "Resultado":str(r['reason'])
             }
         }})
     elif r['status'] == 'triage':
         return jsonify({"Resultado": {
             "Modelo": {
-                "Mensagem": "Esse caso possuí algumas inconsistências e será avalido.",
+                "Mensagem": "Esse caso possuí algumas inconsistências e será avalido. " + str(r['status']),
                 "Resultado":str(r['reason'])
             }
         }})
     else:
        return jsonify({"Resultado": {
             "Modelo": {
-                "Mensagem": "Caso pronto para ser encaminhado para o departamento de pagamentos.",
+                "Mensagem": "Caso pronto para ser encaminhado para o departamento de pagamentos. " + str(r['status']),
                 "Resultado":str(r['reason'])
             }
         }}) 
