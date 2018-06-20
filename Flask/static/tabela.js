@@ -34,7 +34,7 @@ $('#resultados tbody').on( 'click', 'button', function () {
     var dados_enviar_descricao = data[9];
     var json = JSON.stringify(dados_enviar_descricao); 
 
-    window.location.href = "http://localhost:5000/descricao?base64json=" + btoa(json) ;
+    window.location.href = "http://35.227.122.84:8080/descricao?base64json=" + btoa(json) ;
     $.post( "", function( data ) {
         console.log("Sucesso!");
     });

@@ -6,7 +6,6 @@ app = Flask(__name__, static_url_path='/static')
 
 DATABASE = 'database.db'
 
-
 def get_db():
     db = getattr(g, '_database', None)
     if db is None:
@@ -17,7 +16,6 @@ def close_connection(exception):
     db = getattr(g, '_database', None)
     if db is not None:
         db.close()
-
 def query_db(query, args=(), one=False):
     try:
         cur = get_db().execute(query, args)
@@ -28,7 +26,6 @@ def query_db(query, args=(), one=False):
         print("Sem erros")
         print(e)
         pass
-
 def insert(query, args):
     # g.db is the database connection
     cur = get_db()  
@@ -145,6 +142,7 @@ def cadastrar_dados():
         "Content-Type": "application/json"
     }
 
+    #N maiúsculo
     data = {
         "policynumber": str(policynumber),
         "totalclaimamount":int(totalclaimamount),
@@ -226,8 +224,6 @@ def descricao():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
 # create_table_sql = """CREATE TABLE IF NOT EXISTS sinistros(
 #                 id INTEGER PRIMARY KEY,
 #                 anomodelo_veiculo text,

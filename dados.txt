@@ -1,1 +1,0 @@
-<span itemprop="price">R$585,53</span><span itemprop="price">R$1.171,05</span><span itemprop="price">R$2.342,10</span>
