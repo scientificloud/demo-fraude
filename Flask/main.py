@@ -34,17 +34,18 @@ def insert(query, args):
     get_db().commit()
     cur.close()
 
+CREDENCIAIS = "c3VwZXJ1c2VyOmlyaXM="
 
 @app.route('/receber_dados_intersystems/<int:tipo>', methods=['GET', 'POST'])
 def receber_dados_intersystems(tipo):
     import requests, os, json, base64
     URL = "http://35.227.122.84:52773/api/fraud/data/form/objects/ScientifiCloud.Data.InsuranceClaim/all?size=5000&page=1&filter=statusAgent%20eq%20triage"
 
-    credenciais = base64.b64encode("superuser:iris".encode("utf-8"))
-    credenciais = str(credenciais).split("'")[1]
+    # credenciais = base64.b64encode("superuser:iris".encode("utf-8"))
+    # credenciais = str(credenciais).split("'")[1]
 
     headers = {
-        'Authorization': 'Basic %s' %(credenciais),
+        'Authorization': 'Basic %s' %(CREDENCIAIS),
         "Content-Type": "application/json"
     }
 
@@ -85,10 +86,10 @@ def decisao_analista():
 
     json_dados = json.dumps(json_dados)
 
-    credenciais = base64.b64encode("superuser:iris".encode("utf-8"))
-    credenciais = str(credenciais).split("'")[1]
+    # credenciais = base64.b64encode("superuser:iris".encode("utf-8"))
+    # credenciais = str(credenciais).split("'")[1]
     headers = {
-        'Authorization': 'Basic %s' %(credenciais),
+        'Authorization': 'Basic %s' %(CREDENCIAIS),
         "Content-Type": "application/json"
     }
     
@@ -136,10 +137,10 @@ def cadastrar_dados():
     propertyclaim = request.form.get("propertyclaim")
     vehicleclaim = request.form.get("vehicleclaim")
     
-    credenciais = base64.b64encode("superuser:iris".encode("utf-8"))
-    credenciais = str(credenciais).split("'")[1]
+    # credenciais = base64.b64encode("superuser:iris".encode("utf-8"))
+    # credenciais = str(credenciais).split("'")[1]
     headers = {
-        'Authorization': 'Basic %s' %(credenciais),
+        'Authorization': 'Basic %s' %(CREDENCIAIS),
         "Content-Type": "application/json"
     }
 
@@ -187,10 +188,10 @@ def get_parametros(policynumber, totalclaimamount, injuryclaim, propertyclaim, v
 
     #credenciais = b64encode(b"superuser:123").decode("ascii")
 
-    credenciais = base64.b64encode("superuser:iris".encode("utf-8"))
-    credenciais = str(credenciais).split("'")[1]
+    # credenciais = base64.b64encode("superuser:iris".encode("utf-8"))
+    # credenciais = str(credenciais).split("'")[1]
     headers = {
-        'Authorization': 'Basic %s' %(credenciais),
+        'Authorization': 'Basic %s' %(CREDENCIAIS),
         "Content-Type": "application/json"
     }
 
