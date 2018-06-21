@@ -243,12 +243,12 @@
             var base64json = getUrlParameter('base64json');       
             $.ajax({
                 type: 'POST',
-                url: 'http://localhost:5000/decisao_analista?base64json='+ base64json,
+                url: 'http://35.227.122.84:8080/decisao_analista?base64json='+ base64json,
                 data: {decisao: "fraud"},
                 success: function(data) { 
                     console.log(data); 
                     alert("Informação salva")
-                    window.location.replace("http://localhost:5000/analista");
+                    window.location.replace("http://35.227.122.84:8080/analista");
                 },
                 contentType: "application/json",
                 dataType: 'json'
@@ -258,12 +258,12 @@
             var base64json = getUrlParameter('base64json');       
             $.ajax({
                 type: 'POST',
-                url: 'http://localhost:5000/decisao_analista?base64json='+ base64json,
+                url: 'http://35.227.122.84:8080/decisao_analista?base64json='+ base64json,
                 data: {decisao: "non fraud"},
                 success: function(data) {
                     console.log(data); 
                     alert("Informação salva")
-                    window.location.replace("http://localhost:5000/analista");
+                    window.location.replace("http://35.227.122.84:8080/analista");
                 },
                 contentType: "application/json",
                 dataType: 'json'

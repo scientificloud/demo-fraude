@@ -2,6 +2,7 @@
 from flask import Flask, request, render_template, jsonify, g
 import sqlite3
 import base64
+from config import *
 app = Flask(__name__, static_url_path='/static')
 
 DATABASE = 'database.db'
@@ -223,7 +224,7 @@ def descricao():
  
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host=servidor['host'], debug=servidor['debug'], port=servidor['porta'])
 # create_table_sql = """CREATE TABLE IF NOT EXISTS sinistros(
 #                 id INTEGER PRIMARY KEY,
 #                 anomodelo_veiculo text,
