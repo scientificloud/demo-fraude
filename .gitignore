@@ -2,3 +2,5 @@ teste.json
 teste2.json
 
 /.vscode/
+
+Flask/__pycache__
