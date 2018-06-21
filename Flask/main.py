@@ -173,6 +173,13 @@ def cadastrar_dados():
                 "Resultado":str(r['reason'])
             }
         }})
+    elif r['status'] == 'denied':
+        return jsonify({"Resultado": {
+            "Modelo": {
+                "Mensagem": "Esse caso esta na blacklist. " + str(r['status']),
+                "Resultado":str(r['reason'])
+            }
+        }})
     else:
        return jsonify({"Resultado": {
             "Modelo": {
