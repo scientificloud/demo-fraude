@@ -4,7 +4,7 @@ var d = new Date();
 var strDate = d.getFullYear() + "/" + (d.getMonth()+1) + "/" + d.getDate();
 var data_atual = new Date(strDate);
 
-$.get( "http://localhost:5000/receber_dados_intersystems/1", function( data ) {
+$.get( "http://35.227.122.84:8080/receber_dados_intersystems/1", function( data ) {
     $.each(data.Resultado.Dados.children, function(i, item) {
         var html = "";        
         var date1 = new Date(item.incidentDate);
