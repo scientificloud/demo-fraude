@@ -92,9 +92,9 @@ def decisao_analista():
         'Authorization': 'Basic %s' %(CREDENCIAIS),
         "Content-Type": "application/json"
     }
-    print("\n\n\n\n\n")
-    print(json_dados)
-    print("\n\n\n\n\n")
+    # print("\n\n\n\n\n")
+    # print(json_dados)
+    # print("\n\n\n\n\n")
     r = requests.put(URL, headers=headers, data=json_dados)
     
     if(r.status_code == 200):
@@ -120,11 +120,11 @@ def decisao_analista():
 def index():
    return render_template("login.html")
 
-@app.route('/usuario')
+@app.route('/user')
 def usuario():
    return render_template("index.html")
 
-@app.route('/analista')
+@app.route('/analytst')
 def analista():
     return render_template("analista.html")
 
@@ -167,28 +167,28 @@ def cadastrar_dados():
     if r['status'] == "fraud":       
         return jsonify({"Resultado": {
             "Modelo": {
-                "Mensagem": "Foi identificado irregularidade, o caso será encaminhado para auditoria. " + str(r['status']),
+                "Mensagem": "Irregularity has been identified, the case will be referred for audit. " + str(r['status']),
                 "Resultado":str(r['reason'])
             }
         }})
     elif r['status'] == 'triage':
         return jsonify({"Resultado": {
             "Modelo": {
-                "Mensagem": "Esse caso possuí algumas inconsistências e será avalido. " + str(r['status']),
+                "Mensagem": "This case has some inconsistencies and will be evaluated. " + str(r['status']),
                 "Resultado":str(r['reason'])
             }
         }})
     elif r['status'] == 'denied':
         return jsonify({"Resultado": {
             "Modelo": {
-                "Mensagem": "Esse caso esta na blacklist. " + str(r['status']),
+                "Mensagem": "This case is on blacklist. " + str(r['status']),
                 "Resultado":str(r['reason'])
             }
         }})
     else:
        return jsonify({"Resultado": {
             "Modelo": {
-                "Mensagem": "Caso pronto para ser encaminhado para o departamento de pagamentos. " + str(r['status']),
+                "Mensagem": "Case ready to be sent to the payments department. " + str(r['status']),
                 "Resultado":str(r['reason'])
             }
         }}) 
@@ -220,7 +220,7 @@ def get_parametros(policynumber, totalclaimamount, injuryclaim, propertyclaim, v
     return r.json()
 
 
-@app.route("/descricao")
+@app.route("/description")
 def descricao():
     import json
     base64json = request.args.get("base64json")
