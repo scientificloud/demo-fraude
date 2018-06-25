@@ -66,7 +66,7 @@ def receber_dados_intersystems(tipo):
         })
 
 
-@app.route('/decisao_analista', methods=['POST'])
+@app.route('/decisao_analista', methods=['POST', 'PUT'])
 def decisao_analista():
     import requests, json
     import base64   
@@ -78,7 +78,7 @@ def decisao_analista():
     json_dados = json.loads(json_dados)
     json_dados = json.loads(json_dados)
     decisao = dados.replace("decisao=", "")
-
+    json_dados.update({"trace": 0})
     json_dados['statusAgent'] = decisao
 
 
@@ -92,7 +92,9 @@ def decisao_analista():
         'Authorization': 'Basic %s' %(CREDENCIAIS),
         "Content-Type": "application/json"
     }
-    
+    print("\n\n\n\n\n")
+    print(json_dados)
+    print("\n\n\n\n\n")
     r = requests.put(URL, headers=headers, data=json_dados)
     
     if(r.status_code == 200):
@@ -131,7 +133,7 @@ def analista():
 def cadastrar_dados():    
     import requests, json, base64
     URL = "http://35.227.122.84:52773/api/pmml/"
-    policynumber = request.form.get("numero_apolice")
+    policynumber = request.form.get("policyNumber")
     totalclaimamount = request.form.get("totalclaimamount")
     injuryclaim = request.form.get("injuryclaim")
     propertyclaim = request.form.get("propertyclaim")
@@ -147,11 +149,14 @@ def cadastrar_dados():
     #N maiúsculo
     data = {
         "policynumber": str(policynumber),
-        "totalclaimamount":int(totalclaimamount),
-        "injuryclaim":int(injuryclaim),
-        "propertyclaim":int(propertyclaim),
-        "vehicleclaim":int(vehicleclaim)
+        "totalclaimamount":str(totalclaimamount),
+        "injuryclaim":str(injuryclaim),
+        "propertyclaim":str(propertyclaim),
+        "vehicleclaim":str(vehicleclaim),
+        "trace": 1
     }
+
+    print(data)
 
 
     #criar request com base no policy number

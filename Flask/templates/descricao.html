@@ -183,12 +183,15 @@
                 <div class="panel panel-default">                
                     <div class="panel-body">
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <button type="button" id="btn_fraude_confirmada" class="btn btn-danger btn-block">Fraud confirmed</button>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <button type="button" id="btn_falso_positivo" class="btn btn-primary btn-block">False positive</button>
                             </div>
+			<div class="col-lg-4">
+<button type="button" id="btn_voltar" class="btn btn-info btn-block">Return</button>
+</div>
                         </div>                                                         
                     </div>
                 </div>
@@ -238,6 +241,10 @@
             }
         };
 
+$("#btn_voltar").click(function(){
+window.location.replace("http://35.227.122.84:8080/analista");
+});
+
 
         $( "#btn_fraude_confirmada" ).click(function() {
             var base64json = getUrlParameter('base64json');       
@@ -259,7 +266,7 @@
             $.ajax({
                 type: 'POST',
                 url: 'http://35.227.122.84:8080/decisao_analista?base64json='+ base64json,
-                data: {decisao: "non fraud"},
+                data: {decisao: "non-fraud"},
                 success: function(data) {
                     console.log(data); 
                     alert("Informação salva")
