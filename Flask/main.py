@@ -7,42 +7,12 @@ app = Flask(__name__, static_url_path='/static')
 
 DATABASE = 'database.db'
 
-def get_db():
-    db = getattr(g, '_database', None)
-    if db is None:
-        db = g._database = sqlite3.connect(DATABASE)
-    return db
-@app.teardown_appcontext
-def close_connection(exception):
-    db = getattr(g, '_database', None)
-    if db is not None:
-        db.close()
-def query_db(query, args=(), one=False):
-    try:
-        cur = get_db().execute(query, args)
-        rv = cur.fetchall()
-        cur.close()
-        return (rv[0] if rv else None) if one else rv
-    except Exception as e:
-        print("Sem erros")
-        print(e)
-        pass
-def insert(query, args):
-    # g.db is the database connection
-    cur = get_db()  
-    cur.execute(query, args)
-    get_db().commit()
-    cur.close()
-
 CREDENCIAIS = "c3VwZXJ1c2VyOmlyaXM="
 
 @app.route('/receber_dados_intersystems/<int:tipo>', methods=['GET', 'POST'])
 def receber_dados_intersystems(tipo):
     import requests, os, json, base64
     URL = "http://35.227.122.84:52773/api/fraud/data/form/objects/ScientifiCloud.Data.InsuranceClaim/all?size=5000&page=1&filter=statusAgent%20eq%20triage"
-
-    # credenciais = base64.b64encode("superuser:iris".encode("utf-8"))
-    # credenciais = str(credenciais).split("'")[1]
 
     headers = {
         'Authorization': 'Basic %s' %(CREDENCIAIS),
@@ -81,20 +51,15 @@ def decisao_analista():
     json_dados.update({"trace": 0})
     json_dados['statusAgent'] = decisao
 
-
     URL = "http://35.227.122.84:52773/api/fraud/data/form/object/ScientifiCloud.Data.InsuranceClaim/" + str(json_dados["ID"])
 
     json_dados = json.dumps(json_dados)
 
-    # credenciais = base64.b64encode("superuser:iris".encode("utf-8"))
-    # credenciais = str(credenciais).split("'")[1]
     headers = {
         'Authorization': 'Basic %s' %(CREDENCIAIS),
         "Content-Type": "application/json"
     }
-    # print("\n\n\n\n\n")
-    # print(json_dados)
-    # print("\n\n\n\n\n")
+
     r = requests.put(URL, headers=headers, data=json_dados)
     
     if(r.status_code == 200):
@@ -113,7 +78,6 @@ def decisao_analista():
                 "status": False
             }
         })
-
 
 
 @app.route('/')
@@ -139,14 +103,11 @@ def cadastrar_dados():
     propertyclaim = request.form.get("propertyclaim")
     vehicleclaim = request.form.get("vehicleclaim")
     
-    # credenciais = base64.b64encode("superuser:iris".encode("utf-8"))
-    # credenciais = str(credenciais).split("'")[1]
     headers = {
         'Authorization': 'Basic %s' %(CREDENCIAIS),
         "Content-Type": "application/json"
     }
 
-    #N maiúsculo
     data = {
         "policynumber": str(policynumber),
         "totalclaimamount":str(totalclaimamount),
@@ -155,11 +116,6 @@ def cadastrar_dados():
         "vehicleclaim":str(vehicleclaim),
         "trace": 1
     }
-
-    print(data)
-
-
-    #criar request com base no policy number
 
     r = requests.post(URL, headers=headers, data=json.dumps(data))
 
@@ -198,10 +154,6 @@ def get_parametros(policynumber, totalclaimamount, injuryclaim, propertyclaim, v
     import requests, os, json, base64
     URL = "http://35.227.122.84:52773/api/pmml/"
 
-    #credenciais = b64encode(b"superuser:123").decode("ascii")
-
-    # credenciais = base64.b64encode("superuser:iris".encode("utf-8"))
-    # credenciais = str(credenciais).split("'")[1]
     headers = {
         'Authorization': 'Basic %s' %(CREDENCIAIS),
         "Content-Type": "application/json"
@@ -233,32 +185,5 @@ def descricao():
     
     return render_template("descricao.html", dados=json_dados, modelo=parametros)
 
-
- 
-
 if __name__ == "__main__":
     app.run(host=servidor['host'], debug=servidor['debug'], port=servidor['porta'])
-# create_table_sql = """CREATE TABLE IF NOT EXISTS sinistros(
-#                 id INTEGER PRIMARY KEY,
-#                 anomodelo_veiculo text,
-#                 causa_sinistro text,
-#                 chassi_veiculo text,
-#                 cidade_sinistro text,
-#                 danos_sinistro text, 
-#                 data_sinistro text,
-#                 descricao_sinistro text,
-#                 doc_segurado text,
-#                 endereco_sinistro text, 
-#                 estado_sinistro text, 
-#                 hora_sinistro text, 
-#                 marca_veiculo text,
-#                 nome_segurado text, 
-#                 numero_apolice text,
-#                 placa_veiculo text,
-#                 status text,
-#                 sla real,
-#                 score real
-#             )"""
-# conn = sqlite3.connect(DATABASE)
-# conn.execute(create_table_sql)
-# conn.close()
