@@ -102,6 +102,23 @@ def cadastrar_dados():
     injuryclaim = request.form.get("injuryclaim")
     propertyclaim = request.form.get("propertyclaim")
     vehicleclaim = request.form.get("vehicleclaim")
+    address = request.form.get("address")
+    carbrand = request.form.get("carbrand")
+    carplate = request.form.get("carplate")
+    causador_acidente = request.form.get("causador_acidente")
+    cause = request.form.get("cause")
+    chassis = request.form.get("chassis")
+    city = request.form.get("city")
+    damage = request.form.get("damage")
+    data_sinistro = request.form.get("data_sinistro")
+    description = request.form.get("description")
+    docnumber = request.form.get("docnumber")
+    fullname = request.form.get("fullname")
+    houve_vitma = request.form.get("houve_vitma")
+    incidentHourOfTheDay = request.form.get("incidentHourOfTheDay")
+    state = request.form.get("state")
+    utilizado_seguro = request.form.get("utilizado_seguro")
+    yearmodel = request.form.get("yearmodel")
     
     headers = {
         'Authorization': 'Basic %s' %(CREDENCIAIS),
@@ -114,7 +131,24 @@ def cadastrar_dados():
         "injuryclaim":str(injuryclaim),
         "propertyclaim":str(propertyclaim),
         "vehicleclaim":str(vehicleclaim),
-        "trace": 1
+        "trace": 1,
+        "yearmodel": yearmodel,
+        "utilizado_seguro": utilizado_seguro,
+        "state": state,
+        "incidentHourOfTheDay": incidentHourOfTheDay,
+        "houve_vitma": houve_vitma,
+        "fullname": fullname,
+        "docnumber": docnumber,
+        "description": description,
+        "data_sinistro": data_sinistro,
+        "damage": damage,
+        "city": city,
+        "chassis": chassis,
+        "cause": cause,
+        "causador_acidente": causador_acidente,
+        "carplate": carplate,
+        "carbrand": carbrand,
+        "address": address
     }
 
     r = requests.post(URL, headers=headers, data=json.dumps(data))
