@@ -88,7 +88,7 @@ def index():
 def usuario():
    return render_template("index.html")
 
-@app.route('/analytst')
+@app.route('/analyst')
 def analista():
     return render_template("analista.html")
 
